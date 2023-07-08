@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $categories= Category::all();
         return Inertia::render('Basic/Category/Index', [
-            compact('categories')
+            'categories' => $categories,
         ]);
 
     }
@@ -51,10 +51,14 @@ class CategoryController extends Controller
         return $category;
     }
 
-    public function edit(int $id): View
+    public function edit(int $id)
     {
         $category = $this->show($id);
-       return view('basic.category.create', compact('category'));
+        return Inertia::render('Basic/Category/Edit', [
+            'category' => $category,
+        ]);
+
+        //return view('basic.category.editor', compact('category'));
     }
 
     public function update(Request $request, string $id): RedirectResponse

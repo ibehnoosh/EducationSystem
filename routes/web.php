@@ -38,14 +38,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-    Route::get('/categories/create/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::resource('categories', CategoryController::class);
+    Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+/*
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
+*/
     Route::get('/groups', [GroupController::class, 'index'])->name('groups.index');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
     Route::get('/groups/create/{id}', [GroupController::class, 'edit'])->name('groups.edit');
