@@ -1,36 +1,45 @@
 <script setup>
-import Layout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Categories" />
-    <Layout>
+    <Head title="Dashboard" />
+
+    <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Categories
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Categories</h2>
         </template>
-        <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Comment</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="category in categories" :key="category.id">
-                <td>{{ category.title }}</td>
-                <td>{{ category.comment }}</td>
-                <td>
-                    <button @click="editCategory(category.id)">Edit</button>
-                    <button @click="deleteCategory(category.id)">Delete</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </Layout>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Comment</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="category in categories" :key="category.id">
+                                <td>{{ category.title }}</td>
+                                <td>{{ category.comment }}</td>
+                                <td>
+                                    <button @click="editCategory(category.id)">Edit</button>
+                                    <button @click="deleteCategory(category.id)">Delete</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </AuthenticatedLayout>
 </template>
 
 <script>
@@ -48,16 +57,14 @@ export default {
         deleteCategory(categoryId) {
             axios.delete(`/categories/${categoryId}`)
                 .then(response => {
-                    // Handle successful deletion
                     console.log('Category deleted successfully');
-                    // You can perform additional actions here, such as showing a success message or updating the category list
                 })
                 .catch(error => {
-                    // Handle error
                     console.error('Error deleting category', error);
-                    // You can display an error message or handle the error as needed
                 });
         },
     },
 };
 </script>
+
+
