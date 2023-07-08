@@ -21,6 +21,8 @@ import { Head } from '@inertiajs/vue3';
                             <tr>
                                 <th>Title</th>
                                 <th>Comment</th>
+                                <th>Active</th>
+                                <th>Private</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -28,6 +30,8 @@ import { Head } from '@inertiajs/vue3';
                             <tr v-for="category in categories" :key="category.id">
                                 <td>{{ category.title }}</td>
                                 <td>{{ category.comment }}</td>
+                                <td>{{ category.active }}</td>
+                                <td>{{ category.private }}</td>
                                 <td>
                                     <button @click="editCategory(category.id)">Edit</button>
                                     <button @click="deleteCategory(category.id)">Delete</button>
